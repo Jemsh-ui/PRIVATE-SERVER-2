@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIVATE SERVER 2</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: black; 
+        }
+
+        .container {
+            background: linear-gradient(to right, blue, black); 
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, red, blue); 
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+
+        .select-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px; 
+        }
+
+        .select-label {
+            margin-right: 10px;
+            color: white; 
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 10px;
+        }
+
+        .button-container {
+            display: flex; /* Make buttons horizontal */
+        }
+
+        .button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .show-result-button { 
+            background: linear-gradient(to right, blue, black); 
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .clear-button {
+            background-color: #e74c3c; /* Red */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .telegram-link {
+            color: #0088cc;
+            text-decoration: none;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .history-container {
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            background: linear-gradient(to right, blue, red); /* Blue to red gradient */
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 10px;
+            margin-bottom: 5px;
+            color: white; 
+        }
+
+        #serverSelect {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            width: 150px; 
+        }
+
+        #gameSelect {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            width: 150px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">PRIVATE SERVER 2 </h1>
+
+        <div class="input-container">
+            <div class="select-container">
+                <label for="serverSelect" class="select-label">Server:</label>
+                <select id="serverSelect">
+                    <option value="">SERVER OPTION</option>
+                    <option value="Server1">SERVER 1</option>
+                    <option value="Server2">SERVER 2</option>
+                    <option value="Server3">SERVER 3</option>
+                </select>
+            </div>
+
+            <div class="select-container">
+                <label for="gameSelect" class="select-label">Game:</label>
+                <select id="gameSelect">
+                    <option value="">Select Game</option>
+                    <option value="51 Game">51 Game</option>
+                </select>
+            </div>
+
+            <input type="number" class="input-field" placeholder="Enter your input" maxlength="3" oninput="this.value = this.value.slice(0,3);"> 
+            <div class="button-container"> 
+                <button class="show-result-button" onclick="showResult()">Show Result</button> 
+                <button class="clear-button" onclick="clearHistory()">Clear History</button>
+            </div> 
+        </div>
+
+        <a href="https://t.me/badevilmods" class="telegram-link">Join our Telegram channel</a>
+
+        <div class="history-container">
+            <h2>History:</h2>
+            <div id="history"></div>
+        </div>
+    </div>
+
+    <script>
+        let lastInput = "";
+        let lastResult = null; 
+
+        function showResult() {
+            const serverSelect = document.getElementById('serverSelect');
+            const selectedServer = serverSelect.value;
+
+            if (selectedServer === '') {
+                alert("Server Toh Select Karo");
+                return;
+            }
+
+            const gameSelect = document.getElementById('gameSelect');
+            const selectedGame = gameSelect.value;
+
+            if (selectedGame === '') {
+                alert("Game select karo");
+                return;
+            }
+
+            const inputField = document.querySelector('.input-field');
+            const inputValue = inputField.value;
+
+            if (inputValue === '') {
+                alert("Period Toh Dalo");
+                return;
+            }
+
+            if (inputValue === lastInput) {
+                const history = document.getElementById('history');
+                const historyItem = document.createElement('div');
+                historyItem.classList.add('history-item');
+                historyItem.textContent = `${inputValue} (सर्वर: ${selectedServer}) (गेम: ${selectedGame}): ${lastResult}`; 
+                history.prepend(historyItem);
+
+                history.scrollTop = history.scrollHeight; 
+
+                inputField.value = ''; 
+                return; 
+            }
+
+            lastInput = inputValue;
+
+            let randomResult = Math.random() < 0.5 ? 'Small' : 'Big'; 
+            lastResult = randomResult; 
+
+            const history = document.getElementById('history');
+            const historyItem = document.createElement('div');
+            historyItem.classList.add('history-item');
+            historyItem.textContent = `GAME NAME: ${selectedGame} ${inputValue}: ${randomResult}`; 
+            history.prepend(historyItem); 
+
+            history.scrollTop = history.scrollHeight; 
+
+            inputField.value = '';
+        }
+
+        function clearHistory() {
+            const history = document.getElementById('history');
+            history.innerHTML = '';
+        }
+    </script>
+</body>
+</html>
