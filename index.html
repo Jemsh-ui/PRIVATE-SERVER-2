@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRIVATE SERVER 2</title>
+    <title>PRIVATE SERVER 2 </title>
     <style>
         body {
             font-family: sans-serif;
@@ -12,11 +12,11 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: black; 
+            background-color: #f0f0f0; /* Light gray background */
         }
 
         .container {
-            background: linear-gradient(to right, blue, black); 
+            background: linear-gradient(to right, brown, blue); /* Brown to Blue Gradient */
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 30px;
@@ -26,28 +26,13 @@
         .title {
             font-size: 2rem;
             margin-bottom: 20px;
-            background: linear-gradient(to right, red, blue); 
+            background: linear-gradient(to right, red, black); /* Red to Black Gradient */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
         }
 
         .input-container {
             margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
-        }
-
-        .select-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px; 
-        }
-
-        .select-label {
-            margin-right: 10px;
-            color: white; 
         }
 
         .input-field {
@@ -56,10 +41,6 @@
             border: 1px solid #ccc;
             border-radius: 3px;
             margin-bottom: 10px;
-        }
-
-        .button-container {
-            display: flex; /* Make buttons horizontal */
         }
 
         .button {
@@ -73,7 +54,7 @@
         }
 
         .show-result-button { 
-            background: linear-gradient(to right, blue, black); 
+            background-color: #ff0000; /* Unique Red */
             color: white;
             padding: 10px 20px;
             border: none;
@@ -104,12 +85,12 @@
         }
 
         .history-item {
-            background: linear-gradient(to right, blue, red); /* Blue to red gradient */
+            background: linear-gradient(to right, red, brown); /* Red to Brown Gradient */ 
             border: 1px solid #ccc;
             border-radius: 3px;
             padding: 10px;
             margin-bottom: 5px;
-            color: white; 
+            color: white; /* Ensure good contrast */
         }
 
         #serverSelect {
@@ -117,7 +98,6 @@
             border: 1px solid #ccc;
             border-radius: 3px;
             margin-bottom: 10px;
-            width: 150px; 
         }
 
         #gameSelect {
@@ -125,7 +105,6 @@
             border: 1px solid #ccc;
             border-radius: 3px;
             margin-bottom: 10px;
-            width: 150px; 
         }
     </style>
 </head>
@@ -134,29 +113,21 @@
         <h1 class="title">PRIVATE SERVER 2 </h1>
 
         <div class="input-container">
-            <div class="select-container">
-                <label for="serverSelect" class="select-label">Server:</label>
-                <select id="serverSelect">
-                    <option value="">SERVER OPTION</option>
-                    <option value="Server1">SERVER 1</option>
-                    <option value="Server2">SERVER 2</option>
-                    <option value="Server3">SERVER 3</option>
-                </select>
-            </div>
+            <select id="serverSelect">
+                <option value="">SERVER OPTION</option>
+                <option value="Server1">SERVER 1</option>
+                <option value="Server2">SERVER 2</option>
+                <option value="Server3">SERVER 3</option>
+            </select>
 
-            <div class="select-container">
-                <label for="gameSelect" class="select-label">Game:</label>
-                <select id="gameSelect">
-                    <option value="">Select Game</option>
-                    <option value="51 Game">51 Game</option>
-                </select>
-            </div>
+            <select id="gameSelect">
+                <option value="">Select Game</option>
+                <option value="51 Game">51 Game</option>
+            </select>
 
             <input type="number" class="input-field" placeholder="Enter your input" maxlength="3" oninput="this.value = this.value.slice(0,3);"> 
-            <div class="button-container"> 
-                <button class="show-result-button" onclick="showResult()">Show Result</button> 
-                <button class="clear-button" onclick="clearHistory()">Clear History</button>
-            </div> 
+            <button class="show-result-button" onclick="showResult()">Show Result</button> 
+            <button class="clear-button" onclick="clearHistory()">Clear History</button>
         </div>
 
         <a href="https://t.me/badevilmods" class="telegram-link">Join our Telegram channel</a>
@@ -211,7 +182,7 @@
 
             lastInput = inputValue;
 
-            let randomResult = Math.random() < 0.5 ? 'Small' : 'Big'; 
+            let randomResult = Math.random() < 0.5 ? 'Big' : 'Small'; 
             lastResult = randomResult; 
 
             const history = document.getElementById('history');
