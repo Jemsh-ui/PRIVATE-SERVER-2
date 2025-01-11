@@ -3,203 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRIVATE SERVER 2 </title>
+    <title>Priavte Server</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f0f0f0; /* Light gray background */
+            padding: 0;
+            color: #333;
         }
-
         .container {
-            background: linear-gradient(to right, brown, blue); /* Brown to Blue Gradient */
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 30px;
+            width: 80%;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
             text-align: center;
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-weight: bold;
         }
 
-        .title {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, red, black); /* Red to Black Gradient */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .input-container {
-            margin-bottom: 20px;
-        }
-
-        .input-field {
+        /* Custom Select Container */
+        .select-container {
+            position: relative;
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            margin-bottom: 10px;
+            margin-bottom: 30px;
         }
 
+        /* Custom Select Style */
+        select {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 16px;
+            color: #555;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+            background-color: #f5f5f5;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            transition: all 0.3s ease;
+        }
+        select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+
+        /* Button Style */
         .button {
-            background-color: #4CAF50; /* Green */
+            padding: 15px;
+            background-color: #3498db;
             color: white;
-            padding: 10px 20px;
+            font-size: 18px;
             border: none;
-            border-radius: 3px;
+            border-radius: 10px;
             cursor: pointer;
-            margin-right: 10px;
-        }
-
-        .show-result-button { 
-            background-color: #ff0000; /* Unique Red */
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        .clear-button {
-            background-color: #e74c3c; /* Red */
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        .telegram-link {
-            color: #0088cc;
-            text-decoration: none;
-            margin-top: 10px;
-            display: block;
-        }
-
-        .history-container {
+            width: 100%;
+            transition: all 0.3s ease;
             margin-top: 20px;
-            max-height: 200px;
-            overflow-y: auto;
+        }
+        .button:hover {
+            background-color: #2980b9;
         }
 
-        .history-item {
-            background: linear-gradient(to right, red, brown); /* Red to Brown Gradient */ 
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            padding: 10px;
-            margin-bottom: 5px;
-            color: white; /* Ensure good contrast */
+        /* Result Section */
+        .result-section {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .result-section h2 {
+            font-size: 22px;
+            color: #3498db;
+        }
+        .result-section p {
+            font-size: 16px;
         }
 
-        #serverSelect {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            margin-bottom: 10px;
+        /* History Section */
+        .history-section {
+            margin-top: 20px;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-
-        #gameSelect {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
+        .history-section h3 {
+            font-size: 20px;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        .history-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .history-section li {
+            font-size: 14px;
             margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="title">PRIVATE SERVER 2 </h1>
+        <h1>Private Server</h1>
+        <form id="colorPredictionForm">
+            <!-- Server Selection -->
+            <div class="select-container">
+                <label for="server" style="font-size: 18px; font-weight: bold;">Select Server</label>
+                <select id="server" name="server">
+                    <option value="" disabled selected>Select Server</option>
+                    <option value="server1">Server 1</option>
+                    <option value="server2">Server 2</option>
+                    <option value="server3">Server 3</option>
+                </select>
+            </div>
 
-        <div class="input-container">
-            <select id="serverSelect">
-                <option value="">SERVER OPTION</option>
-                <option value="Server1">SERVER 1</option>
-                <option value="Server2">SERVER 2</option>
-                <option value="Server3">SERVER 3</option>
-            </select>
+            <!-- Game Selection -->
+            <div class="select-container">
+                <label for="game" style="font-size: 18px; font-weight: bold;">Select Game</label>
+                <select id="game" name="game">
+                    <option value="" disabled selected>Select Game</option>
+                    <option value="51 Game">51 Game</option>
+                </select>
+            </div>
 
-            <select id="gameSelect">
-                <option value="">Select Game</option>
-                <option value="51 Game">51 Game</option>
-            </select>
+            <!-- Show Result Button -->
+            <button type="button" class="button" onclick="showResult()">Show Result</button>
+            <!-- Clear History Button -->
+            <button type="button" class="button" onclick="clearHistory()">Clear History</button>
+            <!-- Refresh Data Button -->
+            <button type="button" class="button" onclick="refreshData()">Refresh Data</button>
+        </form>
 
-            <input type="number" class="input-field" placeholder="Enter your input" maxlength="3" oninput="this.value = this.value.slice(0,3);"> 
-            <button class="show-result-button" onclick="showResult()">Show Result</button> 
-            <button class="clear-button" onclick="clearHistory()">Clear History</button>
+        <!-- Prediction Result Section -->
+        <div id="resultSection" class="result-section">
+            <h2>Prediction Result</h2>
+            <p><strong>Period Number: </strong><span id="resultPeriodNumber"></span></p>
+            <p><strong>Result :</strong><span id="resultSize"></span></p>
+            <p><strong>Server: </strong><span id="resultServer"></span></p>
+            <p><strong>Game: </strong><span id="resultGame"></span></p>
         </div>
 
-        <a href="https://t.me/badevilmods" class="telegram-link">Join our Telegram channel</a>
-
-        <div class="history-container">
-            <h2>History:</h2>
-            <div id="history"></div>
+        <!-- History Section -->
+        <div id="historySection" class="history-section">
+            <h3>History</h3>
+            <ul id="historyList"></ul>
         </div>
     </div>
 
     <script>
-        let lastInput = "";
-        let lastResult = null; 
+        // Load history from localStorage
+        var historyRecords = JSON.parse(localStorage.getItem('historyRecords')) || [];
 
+        // Get the current period number
+        function getPeriodNumber() {
+            const now = new Date();
+            const utcYear = now.getUTCFullYear();
+            const utcMonth = String(now.getUTCMonth() + 1).padStart(2, '0');
+            const utcDay = String(now.getUTCDate()).padStart(2, '0');
+            const totalMinutes = now.getUTCHours() * 60 + now.getUTCMinutes();
+            const periodNumber = 10001 + totalMinutes; // Customize the period number format
+            return `${utcYear}${utcMonth}${utcDay}1000${periodNumber}`;
+        }
+
+        // Show result and store it in history
         function showResult() {
-            const serverSelect = document.getElementById('serverSelect');
-            const selectedServer = serverSelect.value;
+            var server = document.getElementById('server').value;
+            var game = document.getElementById('game').value;
 
-            if (selectedServer === '') {
-                alert("Server Toh Select Karo");
+            if (!server || !game) {
+                alert("Please select both a server and a game.");
                 return;
             }
 
-            const gameSelect = document.getElementById('gameSelect');
-            const selectedGame = gameSelect.value;
+            const periodNumber = getPeriodNumber();
 
-            if (selectedGame === '') {
-                alert("Game select karo");
+            // Ensure one result per period number (avoid duplicate entries)
+            const existingRecord = historyRecords.find(record => record.period === periodNumber);
+            if (existingRecord) {
+                alert("Result for this period number has already been recorded.");
                 return;
             }
 
-            const inputField = document.querySelector('.input-field');
-            const inputValue = inputField.value;
+            // Randomly decide between Big and Small
+            var sizeOptions = ['Big', 'Small'];
+            var size = sizeOptions[Math.floor(Math.random() * sizeOptions.length)];
 
-            if (inputValue === '') {
-                alert("Period Toh Dalo");
-                return;
-            }
+            // Save result to history
+            var resultRecord = { period: periodNumber, size: size, server: server, game: game };
+            historyRecords.push(resultRecord);
+            localStorage.setItem('historyRecords', JSON.stringify(historyRecords));
 
-            if (inputValue === lastInput) {
-                const history = document.getElementById('history');
-                const historyItem = document.createElement('div');
-                historyItem.classList.add('history-item');
-                historyItem.textContent = `${inputValue} (सर्वर: ${selectedServer}) (गेम: ${selectedGame}): ${lastResult}`; 
-                history.prepend(historyItem);
+            // Display result
+            document.getElementById('resultPeriodNumber').textContent = periodNumber;
+            document.getElementById('resultSize').textContent = size;
+            document.getElementById('resultServer').textContent = server;
+            document.getElementById('resultGame').textContent = game;
 
-                history.scrollTop = history.scrollHeight; 
+            // Show result section
+            document.getElementById('resultSection').style.display = 'block';
 
-                inputField.value = ''; 
-                return; 
-            }
-
-            lastInput = inputValue;
-
-            let randomResult = Math.random() < 0.5 ? 'Big' : 'Small'; 
-            lastResult = randomResult; 
-
-            const history = document.getElementById('history');
-            const historyItem = document.createElement('div');
-            historyItem.classList.add('history-item');
-            historyItem.textContent = `GAME NAME: ${selectedGame} ${inputValue}: ${randomResult}`; 
-            history.prepend(historyItem); 
-
-            history.scrollTop = history.scrollHeight; 
-
-            inputField.value = '';
+            // Update the history display
+            displayHistory();
         }
 
+        // Display history
+        function displayHistory() {
+            var historyList = document.getElementById('historyList');
+            historyList.innerHTML = '';
+            historyRecords.forEach(function(record) {
+                var li = document.createElement('li');
+                li.textContent = `Period: ${record.period} | Result : ${record.size} | Server: ${record.server} | Game: ${record.game}`;
+                historyList.appendChild(li);
+            });
+        }
+
+        // Clear history
         function clearHistory() {
-            const history = document.getElementById('history');
-            history.innerHTML = '';
+            historyRecords = [];
+            localStorage.removeItem('historyRecords');
+            displayHistory();
         }
+
+        // Refresh data
+        function refreshData() {
+            // Reset form fields and result section
+            document.getElementById('colorPredictionForm').reset();
+            document.getElementById('resultSection').style.display = 'none';
+            displayHistory();
+        }
+
+        // Initialize history on page load
+        displayHistory();
     </script>
 </body>
 </html>
